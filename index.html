@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily English Practice</title>
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="nav-drawer-overlay" class="drawer-overlay" onclick="QuizWidgets.closeNavDrawer()"></div>
+
+    <div class="app-container">
+        <header class="top-header">
+            <div class="header-top-row">
+                <h1>Daily English Practice</h1>
+                <button id="btn-fullscreen" class="btn-fullscreen" onclick="QuizWidgets.toggleFullscreen()">
+                    <span id="fs-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+                        </svg>
+                    </span>
+                    <span id="fs-text">Layar Penuh</span>
+                </button>
+            </div>
+            <nav class="tab-nav">
+                <button id="tab-pg" class="tab-btn active" onclick="switchTab('pg')">Pilihan Ganda</button>
+                <button id="tab-listening" class="tab-btn" onclick="switchTab('listening')">Mendengarkan</button>
+                <button id="tab-match" class="tab-btn" onclick="switchTab('match')">Menjodohkan</button>
+                <button id="tab-tf" class="tab-btn" onclick="switchTab('tf')">Benar-Salah</button>
+                <button id="tab-result" class="tab-btn" onclick="switchTab('result')">Hasil Akhir</button>
+            </nav>
+        </header>
+
+        <!-- View 1: Pilihan Ganda -->
+        <section id="view-pg" class="section-view active">
+            <div class="main-layout">
+                <div class="quiz-card">
+                    <div class="q-header-bar">
+                        <div style="display:flex; align-items:center; gap:12px;">
+                            <span id="pg-badge" class="q-badge">Soal 1 dari 30</span>
+                            <button class="btn-nav-toggle" onclick="QuizWidgets.toggleNavDrawer()">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="9" stroke="#2563EB"/>
+                                    <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" fill="#1D4ED8" stroke="#1E40AF"/>
+                                </svg>
+                                <span>Navigasi Soal</span>
+                            </button>
+                        </div>
+                        <button id="pg-flag-btn" class="flag-btn"></button>
+                    </div>
+
+                    <div id="pg-question-text" class="question-text"></div>
+                    <div id="pg-options-container" class="options-list"></div>
+
+                    <div id="pg-explanation-card" class="explanation-card">
+                        <div class="explanation-title">Pembahasan:</div>
+                        <div id="pg-explanation-text"></div>
+                    </div>
+
+                    <div class="nav-actions">
+                        <button id="pg-prev-btn" class="btn btn-secondary" onclick="prevPgQuestion()">← Sebelumnya</button>
+                        <button id="pg-next-btn" class="btn btn-primary" onclick="nextPgQuestion()">Selanjutnya →</button>
+                    </div>
+                </div>
+
+                <aside class="sidebar-card">
+                    <div class="drawer-header">
+                        <div class="sidebar-title" style="margin:0;">Navigasi Soal</div>
+                        <button class="btn-close-drawer" onclick="QuizWidgets.closeNavDrawer()">✕</button>
+                    </div>
+                    <div class="legend">
+                        <div class="legend-item"><span class="dot active"></span> Sedang Dibuka</div>
+                        <div class="legend-item"><span class="dot answered"></span> Sudah Dijawab</div>
+                        <div class="legend-item"><span class="dot flagged"></span> Ragu-ragu</div>
+                    </div>
+                    <div id="pg-question-grid" class="question-grid"></div>
+                </aside>
+            </div>
+        </section>
+
+        <!-- View 2: Mendengarkan -->
+        <section id="view-listening" class="section-view">
+            <div class="main-layout">
+                <div class="quiz-card">
+                    <div class="q-header-bar">
+                        <div style="display:flex; align-items:center; gap:12px;">
+                            <span id="lis-q-badge" class="q-badge">Soal 1 dari 5</span>
+                            <button class="btn-nav-toggle" onclick="QuizWidgets.toggleNavDrawer()">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="9" stroke="#2563EB"/>
+                                    <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" fill="#1D4ED8" stroke="#1E40AF"/>
+                                </svg>
+                                <span>Navigasi Soal</span>
+                            </button>
+                        </div>
+                        <button id="lis-flag-btn" class="flag-btn" onclick="toggleListeningFlag()"></button>
+                    </div>
+
+                    <div class="audio-box">
+                        <div class="audio-controls">
+                            <button class="btn-audio" onclick="playListeningAudio(1.0)">🔊 Putar Suara</button>
+                            <button class="btn-audio btn-slow" onclick="playListeningAudio(0.75)">🐢 Mode Pelan</button>
+                        </div>
+                    </div>
+
+                    <div id="lis-revelation-box" class="revelation-box">
+                        <div id="lis-revealed-text" class="text-spoken"></div>
+                        <div id="lis-revealed-translation" class="text-translated"></div>
+                    </div>
+
+                    <div id="lis-options-list" class="options-list"></div>
+
+                    <div id="lis-explanation-card" class="explanation-card">
+                        <div class="explanation-title">Pembahasan:</div>
+                        <div id="lis-explanation-text"></div>
+                    </div>
+
+                    <div class="nav-actions">
+                        <button id="lis-prev-btn" class="btn btn-secondary" onclick="prevListeningQuestion()">← Sebelumnya</button>
+                        <button id="lis-next-btn" class="btn btn-primary" onclick="nextListeningQuestion()">Selanjutnya →</button>
+                    </div>
+                </div>
+
+                <aside class="sidebar-card">
+                    <div class="drawer-header">
+                        <div class="sidebar-title" style="margin:0;">Navigasi Soal</div>
+                        <button class="btn-close-drawer" onclick="QuizWidgets.closeNavDrawer()">✕</button>
+                    </div>
+                    <div class="legend">
+                        <div class="legend-item"><span class="dot active"></span> Sedang Dibuka</div>
+                        <div class="legend-item"><span class="dot answered"></span> Sudah Dijawab</div>
+                        <div class="legend-item"><span class="dot flagged"></span> Ragu-ragu</div>
+                    </div>
+                    <div id="lis-grid" class="question-grid"></div>
+                </aside>
+            </div>
+        </section>
+
+        <!-- View 3: Menjodohkan -->
+        <section id="view-match" class="section-view">
+            <div class="quiz-card full-width">
+                <div class="q-header-bar">
+                    <span class="q-badge">Sesi Menjodohkan</span>
+                </div>
+                <div id="match-container" class="match-list"></div>
+                
+                <div class="nav-actions">
+                    <button id="match-prev-btn" class="btn btn-secondary" onclick="switchTab('listening')">← Sebelumnya</button>
+                    <button id="match-next-btn" class="btn btn-primary" onclick="switchTab('tf')">Selanjutnya →</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- View 4: Benar-Salah -->
+        <section id="view-tf" class="section-view">
+            <div class="main-layout">
+                <div class="quiz-card">
+                    <div class="q-header-bar">
+                        <div style="display:flex; align-items:center; gap:12px;">
+                            <span id="tf-badge" class="q-badge">Soal 1 dari 10</span>
+                            <button class="btn-nav-toggle" onclick="QuizWidgets.toggleNavDrawer()">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="9" stroke="#2563EB"/>
+                                    <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" fill="#1D4ED8" stroke="#1E40AF"/>
+                                </svg>
+                                <span>Navigasi Soal</span>
+                            </button>
+                        </div>
+                        <button id="tf-flag-btn" class="flag-btn"></button>
+                    </div>
+
+                    <div id="tf-question-text" class="question-text"></div>
+                    <div id="tf-options-container" class="options-list"></div>
+
+                    <div id="tf-explanation-card" class="explanation-card">
+                        <div class="explanation-title">Pembahasan:</div>
+                        <div id="tf-explanation-text"></div>
+                    </div>
+
+                    <div class="nav-actions">
+                        <button id="tf-prev-btn" class="btn btn-secondary" onclick="prevTfQuestion()">← Sebelumnya</button>
+                        <button id="tf-next-btn" class="btn btn-primary" onclick="nextTfQuestion()">Selanjutnya →</button>
+                    </div>
+                </div>
+
+                <aside class="sidebar-card">
+                    <div class="drawer-header">
+                        <div class="sidebar-title" style="margin:0;">Navigasi Soal</div>
+                        <button class="btn-close-drawer" onclick="QuizWidgets.closeNavDrawer()">✕</button>
+                    </div>
+                    <div class="legend">
+                        <div class="legend-item"><span class="dot active"></span> Sedang Dibuka</div>
+                        <div class="legend-item"><span class="dot answered"></span> Sudah Dijawab</div>
+                        <div class="legend-item"><span class="dot flagged"></span> Ragu-ragu</div>
+                    </div>
+                    <div id="tf-question-grid" class="question-grid"></div>
+                </aside>
+            </div>
+        </section>
+
+        <!-- View 5: Hasil Akhir -->
+        <section id="view-result" class="section-view">
+            <div class="quiz-card full-width text-center">
+                <h2>Ringkasan Hasil Ujian</h2>
+                <div class="score-circle-total" id="res-total-score">0%</div>
+                <h3 id="res-eval-title">Evaluasi</h3>
+                <p id="res-eval-desc" style="margin-bottom: 24px; color: var(--text-muted);"></p>
+
+                <div class="score-summary-grid">
+                    <div class="score-box">
+                        <div>Pilihan Ganda</div>
+                        <div id="res-pg-score" class="score-val">0 / 100</div>
+                    </div>
+                    <div class="score-box">
+                        <div>Mendengarkan</div>
+                        <div id="res-lis-score" class="score-val">0 / 100</div>
+                    </div>
+                    <div class="score-box">
+                        <div>Menjodohkan</div>
+                        <div id="res-match-score" class="score-val">0 / 100</div>
+                    </div>
+                    <div class="score-box">
+                        <div>Benar-Salah</div>
+                        <div id="res-tf-score" class="score-val">0 / 100</div>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary" onclick="resetAllQuiz()" style="margin-top: 16px;">Ulangi Ujian Dari Awal</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Script Pemuatan Config & Data -->
+    <script src="config/quizConfig.js"></script>
+    <script src="data/pg-data.js"></script>
+    <script src="data/english_listening.js"></script>
+    <script src="data/match-data.js"></script>
+    <script src="data/tf-data.js"></script>
+
+    <!-- Script Widget & Modul Logika -->
+    <script src="js/widgets.js"></script>
+    <script src="js/module-pg.js"></script>
+    <script src="js/listening.js"></script>
+    <script src="js/module-match.js"></script>
+    <script src="js/module-tf.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

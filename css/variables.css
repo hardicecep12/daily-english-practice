@@ -1,0 +1,16 @@
+:root {
+    --blue-dark: #1E3A8A;
+    --blue-dark-hover: #1E293B;
+    --blue-light: #3B82F6;
+    --blue-light-bg: #E0F2FE;
+    --blue-light-border: #7DD3FC;
+    --gray-bg: #F3F4F6;
+    --card-bg: #FFFFFF;
+    --text-dark: #1E293B;
+    --text-muted: #64748B;
+    --gray-border: #CBD5E1;
+    --gray-state: #94A3B8;
+    --gray-state-bg: #F1F5F9;
+    --radius: 12px;
+    --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
+}

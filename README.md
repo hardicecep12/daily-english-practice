@@ -19,7 +19,7 @@ Daily English Practice adalah aplikasi web untuk latihan bahasa Inggris berbasis
 | :--- | :--- | :---: |
 | **Pilihan Ganda** | Soal tata bahasa dan membaca dengan opsi pilihan ganda dan pembahasan | 30 Soal |
 | **Mendengarkan (Listening)** | Soal berbasis audio dengan transkrip dan terjemahan | 5 Soal |
-| **Menjodohkan (Match)** | Mencocokkan kata, frasa, atau kalimat | Fleksibel |
+| **Menjodohkan (Match)** | Mencocokkan kata, frasa, atau kalimat | 10 Soal |
 | **Benar-Salah (True/False)** | Menentukan kebenaran dari pernyataan yang diberikan | 10 Soal |
 | **Hasil Akhir** | Ringkasan skor per kategori dan opsi mengulang kuis | - |
 

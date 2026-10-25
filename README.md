@@ -84,7 +84,7 @@ Untuk menambahkan atau mengubah daftar soal, berkas JavaScript di dalam folder `
 
 2. **Clone Repository**
    ```bash
-   git clone [https://github.com/hardicecep12/daily-english-practice.git](https://github.com/username/daily-english-practice.git)
+   git clone https://github.com/hardicecep12/daily-english-practice.git
    ```
 
 3. **Buka Aplikasi**

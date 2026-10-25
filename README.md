@@ -91,4 +91,8 @@ Untuk menambahkan atau mengubah daftar soal, berkas JavaScript di dalam folder `
    - Gunakan panel Navigasi Soal untuk berpindah nomor.
    - Pilih tab Hasil Akhir setelah selesai untuk melihat rincian skor.
 
+![Gambar Pertama](images/image1.png)
+
+![Gambar Kedua](images/image2.png)
+
 *Catatan: Dokumentasi ini dibuat dengan bantuan AI (Created with AI assistance).*

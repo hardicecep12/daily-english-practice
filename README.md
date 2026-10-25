@@ -46,6 +46,10 @@ Daily English Practice adalah aplikasi web untuk latihan bahasa Inggris berbasis
     │   ├── english_listening.js  # Data soal dan file audio Listening
     │   ├── match-data.js         # Data soal Menjodohkan
     │   └── tf-data.js            # Data soal Benar-Salah
+    │    
+    ├── images/
+    │   ├── image1                # gambar 1 aplikasi
+    │   └── image2                # gambar 2 aplikasi
     │
     └── js/
         ├── widgets.js            # Fungsi UI (Fullscreen dan Navigation Drawer)
